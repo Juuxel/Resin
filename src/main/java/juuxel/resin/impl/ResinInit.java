@@ -29,7 +29,10 @@ public final class ResinInit implements ModInitializer, ClientModInitializer {
 			if (!dedicated) {
 				commandDispatcher.register(CommandManager.literal("resin").executes(context -> {
 					MinecraftClient.getInstance().execute(() -> {
-						MinecraftClient.getInstance().openScreen(new ResinScreen(new LiteralText("Resin Test"), Resin.id("test")));
+						ResinScreen screen = new ResinScreen(new LiteralText("Resin Test"), Resin.id("test"));
+						Runnable sayHello = () -> System.out.println("Hello, world!");
+						screen.bind("say_hello", sayHello);
+						MinecraftClient.getInstance().openScreen(screen);
 					});
 					return 0;
 				}));

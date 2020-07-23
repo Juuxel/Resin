@@ -3,6 +3,7 @@ package juuxel.resin.api.widget;
 import com.mojang.serialization.Codec;
 import juuxel.resin.Resin;
 import juuxel.resin.api.ResinRegistries;
+import juuxel.resin.api.widget.config.ButtonConfig;
 import juuxel.resin.api.widget.config.GridPanelConfig;
 import juuxel.resin.api.widget.config.LabelConfig;
 import juuxel.resin.api.widget.config.WidgetConfig;
@@ -14,6 +15,7 @@ import java.util.function.Function;
 public interface WidgetType<WC extends WidgetConfig> {
 	WidgetType<LabelConfig> LABEL = of(LabelConfig.CODEC, Label::new);
 	WidgetType<GridPanelConfig> GRID_PANEL = of(GridPanelConfig.CODEC, GridPanel::new);
+	WidgetType<ButtonConfig> BUTTON = of(ButtonConfig.CODEC, Button::new);
 
 	Widget create(WC config);
 	Codec<WC> configCodec();
@@ -36,5 +38,6 @@ public interface WidgetType<WC extends WidgetConfig> {
 	static void init() {
 		Registry.register(ResinRegistries.WIDGET, Resin.id("label"), LABEL);
 		Registry.register(ResinRegistries.WIDGET, Resin.id("grid_panel"), GRID_PANEL);
+		Registry.register(ResinRegistries.WIDGET, Resin.id("button"), BUTTON);
 	}
 }
